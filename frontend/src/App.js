@@ -1,4 +1,5 @@
 import './App.css';
+import Forms from './components/forms';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         </nav>
       </header>
       <body>
-
+        <Forms />
       </body>
     </div>
   );
