@@ -6,28 +6,27 @@ import ButtonUp from "./btnupd";
 import { useEffect, useState } from "react";
 
 export function CardCars({ datos }) {
-    if (!datos || !datos.message) {
+       
+    const userData = datos;
+
+    if (userData) {
         return (
             <>
-                <p>no hay carros registrados</p>
-            </>
-        );
-    }
-    const userData = datos.data;
-    console.log(datos.data);
-    const filteredData = datos.filter((cars) => cars.carsState === 1);
-    if (userData.userState) {
-        return (
-            <>
-                {filteredData.map((cars) => (
-                    <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-                        <div class="card-header">{cars.carId}</div>
+                {datos.map((cars) => (
+                    <div class="card text-white bg-success mb-3" >
+                        <div class="card-header">{cars.idcar}</div>
                         <div class="card-body">
-                            <h4 class="card-title"></h4>
-                            <p class="card-text"></p>
+                            <h4 class="card-title">{cars.carMarca}</h4>
+                            <p class="card-text">{cars.carMatricula}</p>
+                            <p class="card-text">{cars.carModelo}</p>
+                            <p class="card-text">{cars.carColor}</p>
                             <div className="d-flex p-3">
-                                <ButtonDel carId={cars.carId} />
-                                <ButtonUp carId={cars.carId} />
+                                <ButtonDel carId={cars.idcar} />
+                                <ButtonUp carId={cars.idcar} 
+                                carColor={cars.carColor} 
+                                carModelo={cars.carModelo} 
+                                carMatricula={cars.carMatricula} 
+                                carMarca={cars.carMarca}/>
                             </div>
                         </div>
                     </div>
@@ -36,23 +35,16 @@ export function CardCars({ datos }) {
             </>
 
         );
-    } else {
-        return (
-            <>
-                <p>no hay carros registrados</p>
-            </>
-        );
-    }
-}
+}}
 
 export default function Carsget() {
     const [dataCar, setDataCar] = useState([]);
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const fetchData = async () => {
         try {
-            const response = await axios.get("/user");
-            setDataCar(response.dataCar[0]);
-
+            const response = await axios.get("/car");
+            setDataCar(response.data[0]);
+            const data=response.data[0];
         } catch (error) {
             console.error("Error al obtener los datos:", error);
         }

@@ -1,9 +1,9 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 
-export default function ButtonDel({carId}){
+export default function ButtonDel({idcar}){
     const handleDelete = ()=>{
-        console.log(carId);
+        console.log(idcar);
         Swal.fire({
             title: 'Eliminar usuario',
             text: '¿Estás seguro de que deseas eliminar este usuario?',
@@ -24,7 +24,7 @@ export default function ButtonDel({carId}){
 
     const deleteUser=async()=>{
         try{
-            const response=await axios.patch(`/deleteUser/${carId}`);
+            const response=await axios.patch(`/deleteCar/${idcar}`);
             
             console.log(response);
         } catch(e){
@@ -36,7 +36,7 @@ export default function ButtonDel({carId}){
     return(
         <button 
         type="button"
-         class="btn btn-outline-danger"
+         class="btn btn-danger"
          onClick={handleDelete}
          >Delete</button>
     );

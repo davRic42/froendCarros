@@ -24,7 +24,7 @@ export default function Forms() {
         event.preventDefault();
 
         try {
-            const response = await axios.post(`/insertUser`, formData);
+            const response = await axios.post(`/insertCar`, formData);
             const mensaje = response.data.message;
             console.log('Respuesta del servidor:', mensaje);
 
