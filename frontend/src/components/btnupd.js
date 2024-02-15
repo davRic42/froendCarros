@@ -11,10 +11,14 @@ export default function ButtonUp({ idcar, carModelo, carMarca, carColor, carMatr
             showCancelButton: true,
             cancelButtonColor: "#d33",
             html: `
-                <input id="inputMatricula" class="swal2-input" type="text" placeholder="Nuevo nombre" value="${carMatricula}">
-                <input id="inputModelo" class="swal2-input" type="text" placeholder="Nuevo nombre" value="${carModelo}">
-                <input id="inputMarca" class="swal2-input" type="text" placeholder="Nuevo nombre" value="${carMarca}">
-                <input id="inputColor" class="swal2-input" type="text" placeholder="Nuevo nombre" value="${carColor}">
+                <label className="col-sm-2 col-form-label" htmlFor='inputMatricula'>Matricula:</label>
+                <input id="inputMatricula" class="swal2-input" type="text" placeholder="Nueva matricula" value="${carMatricula}">
+                <label className="col-sm-2 col-form-label" htmlFor='inputModelo'>Modelo:</label>
+                <input id="inputModelo" class="swal2-input" type="text" placeholder="Nuevo modelo" value="${carModelo}">
+                <label className="col-sm-2 col-form-label" htmlFor='inputMarca'>Marca:</label>
+                <input id="inputMarca" class="swal2-input" type="text" placeholder="Nuevo Marca" value="${carMarca}">
+                <label className="col-sm-2 col-form-label" htmlFor='inputColor'>Color:</label>
+                <input id="inputColor" class="swal2-input" type="text" placeholder="Nuevo Color" value="${carColor}">
             `,
             focusConfirm: false,
             preConfirm: () => {
@@ -41,17 +45,24 @@ export default function ButtonUp({ idcar, carModelo, carMarca, carColor, carMatr
                 console.log(formData);
                 const responseUp = await axios.put(`/updateCar/${idcar}`, formData);
                 console.log(responseUp.data);
-                // Opcional: Podrías mostrar un mensaje de éxito aquí usando Swal.fire()
-                Swal.fire('¡Actualización exitosa!', 'El carro se ha actualizado correctamente.');
+                Swal.fire({
+                    title: "cambios realzado con exito",
+                    confirmButtonText: "ok",
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                  });
             } catch (error) {
                 console.error(error);
-                // Opcional: Podrías mostrar un mensaje de error aquí usando Swal.fire()
+                console.log(error);
                 Swal.fire('¡Error!', 'Ha ocurrido un error al actualizar el carro.', 'error');
             }
         }
 
         // No es recomendable recargar la página manualmente
-        // window.location.reload();
+        
     };
 
     return (
