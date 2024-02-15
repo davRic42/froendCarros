@@ -68,7 +68,7 @@ export default function ButtonUp({ idcar, carModelo, carMarca, carColor, carMatr
     return (
         <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-info"
             onClick={handleUpdate}
         >
             Update
