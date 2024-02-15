@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react"; // Importa React y useState
 import axios from "axios";
 
 export function CardResult({ datos }) {
@@ -21,7 +20,7 @@ export function CardResult({ datos }) {
     return null;
 }
 
-export default function Search() {
+function Search() {
     const [idcar, setIdCar] = useState('');
     const [data, setData] = useState(null);
 
@@ -34,14 +33,13 @@ export default function Search() {
         try {
             const response = await axios.get(`consultCar/${idcar}`);
             setData(response.data);
-            //console.log(response.data);
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
-        <div className="card text-white bg-primary mb-3 container-fluid mt-5 w-50 p-3" >
+        <div className="card text-white bg-primary mb-3 container-fluid mt-5 w-50 p-3">
             <div className="card-header text-dark">Búsqueda</div>
             <form className="form-group p-3" onSubmit={handleConsult}>
                 <label>Ingrese el id para hacer la búsqueda</label>
@@ -57,3 +55,5 @@ export default function Search() {
         </div>
     );
 }
+
+export default Search; // Exporta Search como componente por defecto

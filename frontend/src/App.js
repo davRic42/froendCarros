@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import Forms from './components/forms';
 import Carsget from './components/cardCars';
-import Search from './components/searchCar';
+import Search from './components/searchcar';
 
 function App() {
   const [cambio, setCambio] = useState(true)
