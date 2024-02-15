@@ -3,8 +3,8 @@ import axios from "axios";
 
 export function CardResult({ datos }) {
     const carData = datos.data;
-    //console.log(carData.data);
-    console.log(carData.idcar);
+    console.log(carData);
+    //console.log(carData.idcar);
     if (carData) {
         return (
             <>
@@ -12,7 +12,7 @@ export function CardResult({ datos }) {
                     <p>Modelo:</p>{carData.carModelo}<br />
                     <p>Matricula:</p>{carData.carMatricula}<br/>
                     <p>Marca:</p>{carData.carMarca}<br/>
-                    <p>Color:</p>{carData.carcColor}<br/>
+                    <p>Color:</p>{carData.carColor}<br/>
                 </p>
             </>
         );
