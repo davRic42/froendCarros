@@ -8,34 +8,38 @@ import { useEffect, useState } from "react";
 export function CardCars({ datos }) {
        
     const userData = datos;
+    const carsFilterd= userData.filter(userData=>userData.carMatricula !==0);
+    if (datos) {
+        const carsFiltered = datos.filter(car => car.carMatricula !== "0");
 
-    if (userData) {
         return (
             <>
-                {datos.map((cars) => (
-                    <div class="card text-white bg-success mb-3" >
-                        <div class="card-header">{cars.idcar}</div>
+                {carsFiltered.map((car) => (
+                    <div class="card text-white bg-success mb-3" key={car.idcar}>
+                        <div class="card-header d-flex"><p>ID:</p>{car.idcar}</div>
                         <div class="card-body">
-                            <h4 class="card-title">{cars.carMarca}</h4>
-                            <p class="card-text">{cars.carMatricula}</p>
-                            <p class="card-text">{cars.carModelo}</p>
-                            <p class="card-text">{cars.carColor}</p>
-                            <div className="d-flex p-3">
-                                <ButtonDel carId={cars.idcar} />
-                                <ButtonUp carId={cars.idcar} 
-                                carColor={cars.carColor} 
-                                carModelo={cars.carModelo} 
-                                carMatricula={cars.carMatricula} 
-                                carMarca={cars.carMarca}/>
+                            <h4 class="card-title d-flex"><p>Marca:</p>{car.carMarca}</h4>
+                            <p class="card-text d-flex"><p>Matricula:</p>{car.carMatricula}</p>
+                            <p class="card-text d-flex"><p>Modelo:</p>{car.carModelo}</p>
+                            <p class="card-text d-flex"><p>Color:</p>{car.carColor}</p>
+                            <div className="d-flex p-10">
+                                <ButtonDel idcar={car.idcar} />
+                                <ButtonUp idcar={car.idcar} 
+                                    carColor={car.carColor} 
+                                    carModelo={car.carModelo} 
+                                    carMatricula={car.carMatricula} 
+                                    carMarca={car.carMarca}
+                                />
                             </div>
                         </div>
                     </div>
                 ))}
-
             </>
-
         );
-}}
+    } else {
+        return null; // Otra opción es mostrar un mensaje de carga o de que no hay datos
+    }
+}
 
 export default function Carsget() {
     const [dataCar, setDataCar] = useState([]);
