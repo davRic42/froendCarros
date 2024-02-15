@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 
-export function cardResult({datos}) {
+export function CardResult({ datos }) {
     const carData = datos.data;
-    console.log(carData[0]);
+    //console.log(carData.data);
+    console.log(carData.idcar);
     if (carData) {
         return (
             <>
@@ -14,16 +15,15 @@ export function cardResult({datos}) {
                     <p>Marca:</p>{carData.carMarca}<br/>
                     <p>Color:</p>{carData.carcColor}<br/>
                 </p>
-
             </>
-
         );
-   
-}}
+    }
+    return null;
+}
 
 export default function Search() {
     const [idcar, setIdCar] = useState('');
-    const [Data, setData] = useState([]);
+    const [data, setData] = useState(null);
 
     const onChangeId = (event) => {
         setIdCar(event.target.value);
@@ -34,26 +34,26 @@ export default function Search() {
         try {
             const response = await axios.get(`consultCar/${idcar}`);
             setData(response.data);
-            console.log(Data);
+            //console.log(response.data);
         } catch (error) {
             console.log(error);
         }
     }
-    return (
-        <div className="card text-white bg-prymary mb-3 container-fluid mt-5 w-50 p-3" >
 
-            <div class="card-header text-dark">busqueda</div>
-            <form class="form-group p-3" onSubmit={handleConsult}>
-                <label> ingrese el id para hacer la busqueda</label>
+    return (
+        <div className="card text-white bg-primary mb-3 container-fluid mt-5 w-50 p-3" >
+            <div className="card-header text-dark">Búsqueda</div>
+            <form className="form-group p-3" onSubmit={handleConsult}>
+                <label>Ingrese el id para hacer la búsqueda</label>
                 <input
                     onChange={onChangeId}
                     value={idcar}
                     type="number"
-                    class="form-control p-3"
-                    placeholder="id del carro" />
-                <button class="btn btn-primary m-3">buscar</button>
+                    className="form-control p-3"
+                    placeholder="ID del carro" />
+                <button className="btn btn-primary m-3">Buscar</button>
             </form>
-            {Data && <cardResult datos={Data} />}
+            {data && <CardResult datos={data} />}
         </div>
     );
 }
